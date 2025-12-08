@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - EduTrack</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="./css dan java/login.css" rel="stylesheet">
+</head>
+<body>
+<div class="login-container">
+    <div class="login-card">
+        <div class="login-header">
+            <img src="./img/logo.png" alt="EduTrack Logo">
+            <h1>EduTrack</h1>
+            <p>Sistem Informasi Akademik</p>
+        </div>
+        
+        <div class="role-selector">
+            <button class="role-btn active" onclick="selectRole('mahasiswa')">Mahasiswa</button>
+            <button class="role-btn" onclick="selectRole('dosen')">Dosen</button>
+            <button class="role-btn" onclick="selectRole('admin')">Admin</button>
+        </div>
+        
+        <form onsubmit="handleLogin(event)">                                                                    
+            <div class="form-group">
+                <label for="username">NRP</label>
+                <input type="text" id="username" name="username" placeholder="Masukkan NRP" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" placeholder="Masukkan password" required>
+            </div>
+            
+            <div class="remember-forgot">
+                <label style="font-weight: normal; margin: 0;">
+                    <input type="checkbox" style="margin-right: 5px;"> Ingat saya
+                </label>
+                <a href="#">Lupa password?</a>
+            </div>
+            
+            <button type="submit" class="login-btn">Masuk</button>
+        </form>
+        
+        <div class="signup-link">
+            Belum punya akun? <a href="#">Daftar sekarang</a>
+        </div>
+    </div>
+</div>
+
+<script src="./css dan java/login.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
