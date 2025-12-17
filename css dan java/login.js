@@ -1,48 +1,34 @@
-const roles = {
-    mahasiswa: {
-        label: 'Mahasiswa',
-        username: '2472021',
-        password: 'ferdinand11@',
-        redirect: './dashboard-mhs.html'
-    },
-    dosen: {
-        label: 'Dosen',
-        username: 'dosen01',
-        password: 'password123',
-        redirect: './dashboard-dosen.html'
-    },
-    admin: {
-        label: 'Admin',
-        username: 'admin01',
-        password: 'password123',
-        redirect: './dashboard-admin.html'
-    }
-};
-
 let currentRole = 'mahasiswa';
 
-function selectRole(role) {
+function selectRole(role, el) {
     currentRole = role;
-    
-    document.querySelectorAll('.role-btn').forEach(btn => {
-        btn.classList.remove('active');
-    });
-    event.target.classList.add('active');
+    document.querySelectorAll('.role-btn').forEach(btn => btn.classList.remove('active'));
+    if (el && el.classList) el.classList.add('active');
 }
 
-function handleLogin(event) {
+async function handleLogin(event) {
     event.preventDefault();
-    
-    const username = document.getElementById('username').value;
+    const nrp = document.getElementById('nrp').value;
     const password = document.getElementById('password').value;
-    const roleData = roles[currentRole];
-    
-    if (username === roleData.username && password === roleData.password) {
-        localStorage.setItem('userRole', currentRole);
-        localStorage.setItem('username', username);
-        
-        window.location.href = roleData.redirect;
-    } else {
-        alert('Username atau password salah!');
+
+    try {
+        // Pastikan URL ini sesuai dengan alamat server backend Anda
+        const API_BASE_URL = 'http://localhost:3000';
+        const res = await fetch(`${API_BASE_URL}/api/login`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ nrp, password, role: currentRole })
+        });
+        const data = await res.json();
+        if (res.ok && data.success) {
+            localStorage.setItem('userRole', data.role);
+            localStorage.setItem('nrp', data.nrp);
+            window.location.href = data.redirect || (data.role === 'mahasiswa' ? './dashboard-mhs.html' : data.role === 'dosen' ? './dashboard-dosen.html' : './dashboard-admin.html');
+        } else {
+            alert(data.message || 'Gagal login');
+        }
+    } catch (err) {
+        console.error(err);
+        alert('Tidak dapat terhubung ke server. Pastikan backend berjalan.');
     }
 }

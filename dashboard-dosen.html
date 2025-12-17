@@ -43,6 +43,9 @@
         </li>
       </ul>
       <ul class="navbar-nav ms-auto">
+        <li class="nav-item d-flex align-items-center me-2">
+          <span class="navbar-text me-2" id="user-nrp"></span>
+        </li>
         <li class="nav-item">
           <button class="btn btn-danger btn-sm" onclick="handleLogout()">Logout</button>
         </li>
@@ -200,10 +203,16 @@
   function handleLogout() {
     if (confirm('Apakah Anda yakin ingin logout?')) {
       localStorage.removeItem('userRole');
-      localStorage.removeItem('username');
+      localStorage.removeItem('nrp');
       window.location.href = './login.html';
     }
   }
+  (function(){
+    const nrp = localStorage.getItem('nrp');
+    if (!nrp) return;
+    const el = document.getElementById('user-nrp');
+    if (el) el.textContent = 'NRP: ' + nrp;
+  })();
 </script>
 
 </body>

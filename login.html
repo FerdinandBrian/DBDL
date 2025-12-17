@@ -17,15 +17,15 @@
         </div>
         
         <div class="role-selector">
-            <button class="role-btn active" onclick="selectRole('mahasiswa')">Mahasiswa</button>
-            <button class="role-btn" onclick="selectRole('dosen')">Dosen</button>
-            <button class="role-btn" onclick="selectRole('admin')">Admin</button>
+            <button class="role-btn active" onclick="selectRole('mahasiswa', this)">Mahasiswa</button>
+            <button class="role-btn" onclick="selectRole('dosen', this)">Dosen</button>
+            <button class="role-btn" onclick="selectRole('admin', this)">Admin</button>
         </div>
         
         <form onsubmit="handleLogin(event)">                                                                    
             <div class="form-group">
-                <label for="username">NRP</label>
-                <input type="text" id="username" name="username" placeholder="Masukkan NRP" required>
+                <label for="nrp">NRP</label>
+                <input type="text" id="nrp" name="nrp" placeholder="Masukkan NRP" required>
             </div>
             
             <div class="form-group">
