@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const pool = require('../db');
-const bcrypt = require('bcrypt');
+// const bcrypt = require('bcrypt'); // Disable bcrypt for simple plain text password check
 
 router.post('/login', async (req, res) => {
   const { nrp, password, role } = req.body;
@@ -17,7 +17,8 @@ router.post('/login', async (req, res) => {
 
     const user = rows[0];
     // Peningkatan Keamanan: Bandingkan password yang diinput dengan hash di database
-    const passwordMatch = await bcrypt.compare(password, user.password);
+    // Simplified: Check password directly (plain text)
+    const passwordMatch = password === user.password;
 
     if (!passwordMatch) {
       return res.status(401).json({ success: false, message: 'Password salah' });

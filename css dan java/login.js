@@ -14,7 +14,7 @@ async function handleLogin(event) {
     try {
         // Pastikan URL ini sesuai dengan alamat server backend Anda
         const API_BASE_URL = 'http://localhost:3000';
-        const res = await fetch(`${API_BASE_URL}/api/login`, {
+        const res = await fetch(`${API_BASE_URL}/login.php`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ nrp, password, role: currentRole })

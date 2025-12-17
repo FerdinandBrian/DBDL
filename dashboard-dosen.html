@@ -1,219 +1,233 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard Dosen</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="./css dan java/style.css" rel="stylesheet">
-    <link href="./css dan java/dashboard.css" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard Dosen</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="./css dan java/style.css" rel="stylesheet">
+  <link href="./css dan java/dashboard.css" rel="stylesheet">
 </head>
+
 <body>
-<nav class="navbar navbar-expand-lg navbar-light">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="#">
+  <nav class="navbar navbar-expand-lg navbar-light">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">
         <img src="./img/logo.png" alt="EduTrack Logo">
         EduTrack
-    </a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav">
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="./dashboard-dosen.html">Home</a>
-        </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarAkademik" role="button" data-bs-toggle="dropdown" aria-expanded="false">Akademik</a>
-          <ul class="dropdown-menu" aria-labelledby="navbarAkademik">
-            <li><a class="dropdown-item" href="#">Daftar Kelas</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="#">Input Nilai</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="#">Presensi Mengajar</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="#">Laporan Mengajar</a></li>
-          </ul>
-        </li>
-         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarKeuangan" role="button" data-bs-toggle="dropdown" aria-expanded="false">Keuangan</a>
-          <ul class="dropdown-menu" aria-labelledby="navbarKeuangan">
-            <li><a class="dropdown-item" href="#">Slip Gaji</a></li>
-          </ul>
-        </li>
-      </ul>
-      <ul class="navbar-nav ms-auto">
-        <li class="nav-item d-flex align-items-center me-2">
-          <span class="navbar-text me-2" id="user-nrp"></span>
-        </li>
-        <li class="nav-item">
-          <button class="btn btn-danger btn-sm" onclick="handleLogout()">Logout</button>
-        </li>
-      </ul>
-    </div>
-  </div>
-</nav>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="./dashboard-dosen.html">Home</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarAkademik" role="button" data-bs-toggle="dropdown"
+              aria-expanded="false">Akademik</a>
+            <ul class="dropdown-menu" aria-labelledby="navbarAkademik">
+              <li><a class="dropdown-item" href="./dosen-kelas.html">Daftar Kelas</a></li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+              <li><a class="dropdown-item" href="./dosen-nilai.html">Input Nilai</a></li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+              <li><a class="dropdown-item" href="./dosen-presensi.html">Presensi Mahasiswa</a></li>
+            </ul>
+          </li>
 
-<section class="announcements py-5" style="background-color: #f8f9fa;">
-  <div class="container">
-    <h2 class="mb-4">📢 Pengumuman</h2>
-    <div class="row g-4">
-      <div class="col-md-6 col-lg-4">
-        <div class="card h-100 border-0 shadow-sm" style="border-left: 4px solid #667eea; overflow: hidden;">
-          <img src="./img/maintenance.jpg" class="card-img-top" alt="Perbaikan Sistem" style="width: 100%; height: 200px; object-fit: cover;">
-          <div class="card-body">
-            <h5 class="card-title">Perbaikan Sistem</h5>
-            <p class="card-text text-muted" style="font-size: 0.9rem;">8 Desember 2025</p>
-            <p class="card-text">Kami melakukan perbaikan sistem akademik untuk meningkatkan performa dan keamanan data dosen.</p>
-            <a href="#" class="btn btn-sm btn-outline-primary">Baca Selengkapnya</a>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-6 col-lg-4">
-        <div class="card h-100 border-0 shadow-sm" style="border-left: 4px solid #764ba2; overflow: hidden;">
-          <img src="./img/ujian.jpg" class="card-img-top" alt="Jadwal Ujian" style="width: 100%; height: 200px; object-fit: cover;">
-          <div class="card-body">
-            <h5 class="card-title">Jadwal Pelaksanaan UAS</h5>
-            <p class="card-text text-muted" style="font-size: 0.9rem;">5 Desember 2025</p>
-            <p class="card-text">Jadwal Ujian Akhir Semester (UAS) tahun ajaran 2025/2026 semester ganjil telah ditetapkan.</p>
-            <a href="#" class="btn btn-sm btn-outline-primary">Baca Selengkapnya</a>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-6 col-lg-4">
-        <div class="card h-100 border-0 shadow-sm" style="border-left: 4px solid #e41414; overflow: hidden;">
-          <img src="./img/pembayaran.jpg" class="card-img-top" alt="Pengingat Dokumen" style="width: 100%; height: 200px; object-fit: cover;">
-          <div class="card-body">
-            <h5 class="card-title">Pengingat Pengumpulan Dokumen</h5>
-            <p class="card-text text-muted" style="font-size: 0.9rem;">1 Desember 2025</p>
-            <p class="card-text">Batas akhir pengumpulan dokumen nilai adalah 15 Desember 2025. Harap segera lengkapi.</p>
-            <a href="#" class="btn btn-sm btn-outline-danger">Baca Selengkapnya</a>
-          </div>
-        </div>
+        </ul>
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item d-flex align-items-center me-2">
+            <span class="navbar-text me-2" id="user-nrp"></span>
+          </li>
+          <li class="nav-item">
+            <button class="btn btn-danger btn-sm" onclick="handleLogout()">Logout</button>
+          </li>
+        </ul>
       </div>
     </div>
-  </div>
-</section>
+  </nav>
 
-<section class="calendar-section py-5">
-  <div class="container">
-    <h2 class="mb-4">📅 Kalender Akademik</h2>
-    <div class="row">
-      <div class="col-lg-8">
-        <div class="card border-0 shadow-sm">
-          <div class="card-header" style="background: linear-gradient(135deg, #becaff 0%, #b377ee 100%); color: white;">
-            <h5 class="mb-0">Desember 2025</h5>
+  <section class="announcements py-5" style="background-color: #f8f9fa;">
+    <div class="container">
+      <h2 class="mb-4">📢 Pengumuman</h2>
+      <div class="row g-4">
+        <div class="col-md-6 col-lg-4">
+          <div class="card h-100 border-0 shadow-sm" style="border-left: 4px solid #667eea; overflow: hidden;">
+            <img src="./img/maintenance.jpg" class="card-img-top" alt="Perbaikan Sistem"
+              style="width: 100%; height: 200px; object-fit: cover;">
+            <div class="card-body">
+              <h5 class="card-title">Perbaikan Sistem</h5>
+              <p class="card-text text-muted" style="font-size: 0.9rem;">8 Desember 2025</p>
+              <p class="card-text">Kami melakukan perbaikan sistem akademik untuk meningkatkan performa dan keamanan
+                data dosen.</p>
+              <a href="#" class="btn btn-sm btn-outline-primary">Baca Selengkapnya</a>
+            </div>
           </div>
-          <div class="card-body">
-            <div class="table-responsive">
-              <table class="table table-bordered text-center">
-                <thead style="background-color: #f8f9fa;">
-                  <tr>
-                    <th>Min</th>
-                    <th>Sen</th>
-                    <th>Sel</th>
-                    <th>Rab</th>
-                    <th>Kam</th>
-                    <th>Jum</th>
-                    <th>Sab</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td colspan="2"></td>
-                    <td>1</td>
-                    <td>2</td>
-                    <td>3</td>
-                    <td>4</td>
-                    <td style="background-color: #667eea; font-weight: bold;">5</td>
-                  </tr>
-                  <tr>
-                    <td>7</td>
-                    <td>8</td>
-                    <td>9</td>
-                    <td>10</td>
-                    <td>11</td>
-                    <td>12</td>
-                    <td>13</td>
-                  </tr>
-                  <tr>
-                    <td>14</td>
-                    <td style="background-color: #764ba2; font-weight: bold;">15</td>
-                    <td>16</td>
-                    <td>17</td>
-                    <td>18</td>
-                    <td>19</td>
-                    <td style="background-color: #e41414; font-weight: bold;">20</td>
-                  </tr>
-                  <tr>
-                    <td>21</td>
-                    <td>22</td>
-                    <td>23</td>
-                    <td>24</td>
-                    <td style="background-color: #ffc107; font-weight: bold;">25</td>
-                    <td>26</td>
-                    <td>27</td>
-                  </tr>
-                  <tr>
-                    <td>28</td>
-                    <td>29</td>
-                    <td>30</td>
-                    <td>31</td>
-                    <td colspan="3"></td>
-                  </tr>
-                </tbody>
-              </table>
+        </div>
+        <div class="col-md-6 col-lg-4">
+          <div class="card h-100 border-0 shadow-sm" style="border-left: 4px solid #764ba2; overflow: hidden;">
+            <img src="./img/ujian.jpg" class="card-img-top" alt="Jadwal Ujian"
+              style="width: 100%; height: 200px; object-fit: cover;">
+            <div class="card-body">
+              <h5 class="card-title">Jadwal Pelaksanaan UAS</h5>
+              <p class="card-text text-muted" style="font-size: 0.9rem;">5 Desember 2025</p>
+              <p class="card-text">Jadwal Ujian Akhir Semester (UAS) tahun ajaran 2025/2026 semester ganjil telah
+                ditetapkan.</p>
+              <a href="#" class="btn btn-sm btn-outline-primary">Baca Selengkapnya</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4">
+          <div class="card h-100 border-0 shadow-sm" style="border-left: 4px solid #e41414; overflow: hidden;">
+            <img src="./img/pembayaran.jpg" class="card-img-top" alt="Pengingat Dokumen"
+              style="width: 100%; height: 200px; object-fit: cover;">
+            <div class="card-body">
+              <h5 class="card-title">Pengingat Pengumpulan Dokumen</h5>
+              <p class="card-text text-muted" style="font-size: 0.9rem;">1 Desember 2025</p>
+              <p class="card-text">Batas akhir pengumpulan dokumen nilai adalah 15 Desember 2025. Harap segera lengkapi.
+              </p>
+              <a href="#" class="btn btn-sm btn-outline-danger">Baca Selengkapnya</a>
             </div>
           </div>
         </div>
       </div>
-      <div class="col-lg-4">
-        <div class="card border-0 shadow-sm mb-3">
-          <div class="card-header" style="background: linear-gradient(135deg, #becaff 0%, #b377ee 100%); color: white;">
-            <h5 class="mb-0">Jadwal Penting</h5>
+    </div>
+  </section>
+
+  <section class="calendar-section py-5">
+    <div class="container">
+      <h2 class="mb-4">📅 Kalender Akademik</h2>
+      <div class="row">
+        <div class="col-lg-8">
+          <div class="card border-0 shadow-sm">
+            <div class="card-header"
+              style="background: linear-gradient(135deg, #becaff 0%, #b377ee 100%); color: white;">
+              <h5 class="mb-0">Desember 2025</h5>
+            </div>
+            <div class="card-body">
+              <div class="table-responsive">
+                <table class="table table-bordered text-center">
+                  <thead style="background-color: #f8f9fa;">
+                    <tr>
+                      <th>Min</th>
+                      <th>Sen</th>
+                      <th>Sel</th>
+                      <th>Rab</th>
+                      <th>Kam</th>
+                      <th>Jum</th>
+                      <th>Sab</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td colspan="2"></td>
+                      <td>1</td>
+                      <td>2</td>
+                      <td>3</td>
+                      <td>4</td>
+                      <td style="background-color: #667eea; font-weight: bold;">5</td>
+                    </tr>
+                    <tr>
+                      <td>7</td>
+                      <td>8</td>
+                      <td>9</td>
+                      <td>10</td>
+                      <td>11</td>
+                      <td>12</td>
+                      <td>13</td>
+                    </tr>
+                    <tr>
+                      <td>14</td>
+                      <td style="background-color: #764ba2; font-weight: bold;">15</td>
+                      <td>16</td>
+                      <td>17</td>
+                      <td>18</td>
+                      <td>19</td>
+                      <td style="background-color: #e41414; font-weight: bold;">20</td>
+                    </tr>
+                    <tr>
+                      <td>21</td>
+                      <td>22</td>
+                      <td>23</td>
+                      <td>24</td>
+                      <td style="background-color: #ffc107; font-weight: bold;">25</td>
+                      <td>26</td>
+                      <td>27</td>
+                    </tr>
+                    <tr>
+                      <td>28</td>
+                      <td>29</td>
+                      <td>30</td>
+                      <td>31</td>
+                      <td colspan="3"></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
           </div>
-          <div class="card-body">
-            <ul class="list-unstyled">
-              <li class="mb-3">
-                <span style="display: inline-block; width: 10px; height: 10px; background-color: #667eea; border-radius: 50%; margin-right: 8px;"></span>
-                <strong>5 Des</strong> - UAS Dimulai
-              </li>
-              <li class="mb-3">
-                <span style="display: inline-block; width: 10px; height: 10px; background-color: #764ba2; border-radius: 50%; margin-right: 8px;"></span>
-                <strong>15 Des</strong> - Batas Input Nilai
-              </li>
-              <li class="mb-3">
-                <span style="display: inline-block; width: 10px; height: 10px; background-color: #e41414; border-radius: 50%; margin-right: 8px;"></span>
-                <strong>20 Des</strong> - Verifikasi Nilai
-              </li>
-              <li class="mb-3">
-                <span style="display: inline-block; width: 10px; height: 10px; background-color: #ffc107; border-radius: 50%; margin-right: 8px;"></span>
-                <strong>25 Des</strong> - Libur Hari Raya Natal
-              </li>
-            </ul>
+        </div>
+        <div class="col-lg-4">
+          <div class="card border-0 shadow-sm mb-3">
+            <div class="card-header"
+              style="background: linear-gradient(135deg, #becaff 0%, #b377ee 100%); color: white;">
+              <h5 class="mb-0">Jadwal Penting</h5>
+            </div>
+            <div class="card-body">
+              <ul class="list-unstyled">
+                <li class="mb-3">
+                  <span
+                    style="display: inline-block; width: 10px; height: 10px; background-color: #667eea; border-radius: 50%; margin-right: 8px;"></span>
+                  <strong>5 Des</strong> - UAS Dimulai
+                </li>
+                <li class="mb-3">
+                  <span
+                    style="display: inline-block; width: 10px; height: 10px; background-color: #764ba2; border-radius: 50%; margin-right: 8px;"></span>
+                  <strong>15 Des</strong> - Batas Input Nilai
+                </li>
+                <li class="mb-3">
+                  <span
+                    style="display: inline-block; width: 10px; height: 10px; background-color: #e41414; border-radius: 50%; margin-right: 8px;"></span>
+                  <strong>20 Des</strong> - Verifikasi Nilai
+                </li>
+                <li class="mb-3">
+                  <span
+                    style="display: inline-block; width: 10px; height: 10px; background-color: #ffc107; border-radius: 50%; margin-right: 8px;"></span>
+                  <strong>25 Des</strong> - Libur Hari Raya Natal
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-<script>
-  function handleLogout() {
-    if (confirm('Apakah Anda yakin ingin logout?')) {
-      localStorage.removeItem('userRole');
-      localStorage.removeItem('nrp');
-      window.location.href = './login.html';
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    function handleLogout() {
+      if (confirm('Apakah Anda yakin ingin logout?')) {
+        localStorage.removeItem('userRole');
+        localStorage.removeItem('nrp');
+        window.location.href = './login.html';
+      }
     }
-  }
-  (function(){
-    const nrp = localStorage.getItem('nrp');
-    if (!nrp) return;
-    const el = document.getElementById('user-nrp');
-    if (el) el.textContent = 'NRP: ' + nrp;
-  })();
-</script>
+    (function () {
+      const nrp = localStorage.getItem('nrp');
+      if (!nrp) return;
+      const el = document.getElementById('user-nrp');
+      if (el) el.textContent = 'NRP: ' + nrp;
+    })();
+  </script>
 
 </body>
+
 </html>

@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Presensi Mahasiswa - EduTrack Dosen</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="./css dan java/style.css" rel="stylesheet">
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+                <img src="./img/logo.png" alt="EduTrack Logo">
+                EduTrack
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="./dashboard-dosen.html">Home</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle active" href="#" id="navbarAkademik" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">Akademik</a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarAkademik">
+                            <li><a class="dropdown-item" href="./dosen-kelas.html">Daftar Kelas</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="./dosen-nilai.html">Input Nilai</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="./dosen-presensi.html">Presensi Mahasiswa</a></li>
+                        </ul>
+                    </li>
+
+                </ul>
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item d-flex align-items-center me-2">
+                        <span class="navbar-text me-2" id="user-nrp"></span>
+                    </li>
+                    <li class="nav-item">
+                        <button class="btn btn-danger btn-sm" onclick="handleLogout()">Logout</button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-5">
+        <h1>Presensi Mahasiswa</h1>
+        <p>Kelola kehadiran mahasiswa pada kelas Anda.</p>
+
+        <div class="card shadow-sm border-0 mb-4">
+            <div class="card-body">
+                <form class="row g-3">
+                    <div class="col-md-5">
+                        <label class="form-label">Pilih Kelas</label>
+                        <select class="form-select">
+                            <option>IF201 - Desain Basis Data Lanjut</option>
+                            <option>IF305 - Pemrograman Web</option>
+                        </select>
+                    </div>
+                    <div class="col-md-5">
+                        <label class="form-label">Pilih Pertemuan</label>
+                        <select class="form-select">
+                            <option>Pertemuan 1 (03 Des 2025)</option>
+                            <option>Pertemuan 2 (10 Des 2025)</option>
+                            <option>Pertemuan 3 (17 Des 2025)</option>
+                        </select>
+                    </div>
+                    <div class="col-md-2 d-flex align-items-end">
+                        <button type="button" class="btn btn-primary w-100">Buka</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="card shadow-sm border-0">
+            <div class="card-header bg-white d-flex justify-content-between align-items-center">
+                <h5 class="mb-0">Daftar Mahasiswa</h5>
+                <div>
+                    <span class="badge bg-secondary me-2">Total: 35</span>
+                    <span class="badge bg-success">Hadir: 30</span>
+                </div>
+            </div>
+            <div class="card-body p-0">
+                <div class="table-responsive">
+                    <table class="table table-striped mb-0 align-middle">
+                        <thead>
+                            <tr>
+                                <th width="5%">No</th>
+                                <th>NRP</th>
+                                <th>Nama</th>
+                                <th class="text-center">Status</th>
+                                <th class="text-center">Keterangan</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>2472021</td>
+                                <td>Mahasiswa Demo</td>
+                                <td class="text-center">
+                                    <div class="btn-group" role="group">
+                                        <input type="radio" class="btn-check" name="status1" id="h1" autocomplete="off"
+                                            checked>
+                                        <label class="btn btn-outline-success btn-sm" for="h1">H</label>
+
+                                        <input type="radio" class="btn-check" name="status1" id="s1" autocomplete="off">
+                                        <label class="btn btn-outline-warning btn-sm" for="s1">S</label>
+
+                                        <input type="radio" class="btn-check" name="status1" id="i1" autocomplete="off">
+                                        <label class="btn btn-outline-info btn-sm" for="i1">I</label>
+
+                                        <input type="radio" class="btn-check" name="status1" id="a1" autocomplete="off">
+                                        <label class="btn btn-outline-danger btn-sm" for="a1">A</label>
+                                    </div>
+                                </td>
+                                <td class="text-center">
+                                    <input type="text" class="form-control form-control-sm" placeholder="-">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>2472022</td>
+                                <td>Budi Santoso</td>
+                                <td class="text-center">
+                                    <div class="btn-group" role="group">
+                                        <input type="radio" class="btn-check" name="status2" id="h2" autocomplete="off"
+                                            checked>
+                                        <label class="btn btn-outline-success btn-sm" for="h2">H</label>
+
+                                        <input type="radio" class="btn-check" name="status2" id="s2" autocomplete="off">
+                                        <label class="btn btn-outline-warning btn-sm" for="s2">S</label>
+
+                                        <input type="radio" class="btn-check" name="status2" id="i2" autocomplete="off">
+                                        <label class="btn btn-outline-info btn-sm" for="i2">I</label>
+
+                                        <input type="radio" class="btn-check" name="status2" id="a2" autocomplete="off">
+                                        <label class="btn btn-outline-danger btn-sm" for="a2">A</label>
+                                    </div>
+                                </td>
+                                <td class="text-center">
+                                    <input type="text" class="form-control form-control-sm" placeholder="-">
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="card-footer bg-white text-end">
+                <button class="btn btn-primary">Simpan Presensi</button>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function handleLogout() {
+            if (confirm('Apakah Anda yakin ingin logout?')) {
+                localStorage.removeItem('userRole');
+                localStorage.removeItem('nrp');
+                window.location.href = './login.html';
+            }
+        }
+        (function () {
+            const nrp = localStorage.getItem('nrp');
+            if (!nrp) return;
+            const el = document.getElementById('user-nrp');
+            if (el) el.textContent = 'NRP: ' + nrp;
+        })();
+    </script>
+</body>
+
+</html>
