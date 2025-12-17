@@ -1,25 +1,25 @@
 const express = require('express');
 const router = express.Router();
 const pool = require('../db');
+const bcrypt = require('bcrypt');
 
 router.post('/login', async (req, res) => {
   const { nrp, password, role } = req.body;
   if (!nrp || !password || !role) return res.status(400).json({ success: false, message: 'nrp, password, and role required' });
 
   try {
-    // Perbaikan: Cari user berdasarkan NRP saja, karena role tidak ada di tabel users.
-    // Kita akan memvalidasi role setelahnya.
-    const [rows] = await pool.execute('SELECT nrp, password, role, redirect FROM users WHERE nrp = ? LIMIT 1', [nrp]);
+    // Perbaikan: Cari user berdasarkan NRP dan Role secara bersamaan.
+    // Ini lebih akurat sesuai dengan skema database (UNIQUE KEY (nrp, role)).
+    const [rows] = await pool.execute('SELECT nrp, password, role, redirect FROM users WHERE nrp = ? AND role = ? LIMIT 1', [nrp, role]);
     if (rows.length === 0) {
-      return res.status(401).json({ success: false, message: 'NRP tidak ditemukan' });
+      return res.status(401).json({ success: false, message: 'Kombinasi NRP dan Role tidak ditemukan' });
     }
 
     const user = rows[0];
-    // Tambahan: Validasi apakah role yang dipilih di frontend cocok dengan role user di database
-    if (user.role !== role) {
-      return res.status(401).json({ success: false, message: `NRP ini tidak terdaftar sebagai ${role}` });
-    }
-    if (user.password !== password) {
+    // Peningkatan Keamanan: Bandingkan password yang diinput dengan hash di database
+    const passwordMatch = await bcrypt.compare(password, user.password);
+
+    if (!passwordMatch) {
       return res.status(401).json({ success: false, message: 'Password salah' });
     }
 
