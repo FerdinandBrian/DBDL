@@ -77,11 +77,71 @@
         window.location.href = './login.html';
       }
     }
-    (function () {
+    (async function () {
       const nrp = localStorage.getItem('nrp');
-      if (!nrp) return;
-      const el = document.getElementById('user-nrp');
-      if (el) el.textContent = 'NRP: ' + nrp;
+      const userRole = localStorage.getItem('userRole');
+
+      if (!nrp || userRole !== 'mahasiswa') {
+        window.location.href = './login.html';
+        return;
+      }
+
+      try {
+        // Fetch User Data for Navbar
+        const responseMhs = await fetch(`http://localhost:8000/server/mhs.php?nrp=${nrp}`);
+        const resultMhs = await responseMhs.json();
+        if (resultMhs.success) {
+          const data = resultMhs.data;
+          const el = document.getElementById('user-nrp');
+          if (el) el.textContent = `${data.nama} (${data.nrp})`;
+        }
+
+        // Fetch Jadwal Data for Table
+        const responseJadwal = await fetch(`http://localhost:8000/server/get_jadwal.php?nrp=${nrp}`);
+        const resultJadwal = await responseJadwal.json();
+
+        if (resultJadwal.success) {
+          const container = document.querySelector('.container.mt-5');
+
+          if (resultJadwal.data.length > 0) {
+            let html = `
+              <table class="table table-bordered mt-4">
+                <thead class="table-dark">
+                  <tr>
+                    <th>Hari</th>
+                    <th>Jam</th>
+                    <th>Mata Kuliah</th>
+                    <th>Kelas</th>
+                    <th>Ruang</th>
+                    <th>Dosen</th>
+                  </tr>
+                </thead>
+                <tbody>
+            `;
+
+            resultJadwal.data.forEach(item => {
+              html += `
+                <tr>
+                  <td>${item.hari}</td>
+                  <td>${item.jam_mulai} - ${item.jam_selesai}</td>
+                  <td>${item.nama_mk}</td>
+                  <td>${item.nama_kelas}</td>
+                  <td>${item.ruang}</td>
+                  <td>${item.nama_dosen}</td>
+                </tr>
+              `;
+            });
+
+            html += `</tbody></table>`;
+            container.innerHTML += html;
+          } else {
+            container.innerHTML += `<div class="alert alert-info mt-4">Tidak ada jadwal kuliah.</div>`;
+          }
+        }
+
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
     })();
   </script>
 </body>

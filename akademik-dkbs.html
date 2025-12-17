@@ -77,11 +77,71 @@
         window.location.href = './login.html';
       }
     }
-    (function () {
+    (async function () {
       const nrp = localStorage.getItem('nrp');
-      if (!nrp) return;
-      const el = document.getElementById('user-nrp');
-      if (el) el.textContent = 'NRP: ' + nrp;
+      const userRole = localStorage.getItem('userRole');
+
+      if (!nrp || userRole !== 'mahasiswa') {
+        window.location.href = './login.html';
+        return;
+      }
+
+      try {
+        // Fetch User Data for Navbar
+        const responseMhs = await fetch(`http://localhost:8000/server/mhs.php?nrp=${nrp}`);
+        const resultMhs = await responseMhs.json();
+        if (resultMhs.success) {
+          const data = resultMhs.data;
+          const el = document.getElementById('user-nrp');
+          if (el) el.textContent = `${data.nama} (${data.nrp})`;
+        }
+
+        // Fetch DKBS Data for Table
+        const responseDkbs = await fetch(`http://localhost:8000/server/get_dkbs.php?nrp=${nrp}`);
+        const resultDkbs = await responseDkbs.json();
+
+        if (resultDkbs.success) {
+          const container = document.querySelector('.container.mt-5');
+
+          if (resultDkbs.data.length > 0) {
+            let html = `
+              <table class="table table-striped mt-4">
+                <thead>
+                  <tr>
+                    <th>Kode MK</th>
+                    <th>Mata Kuliah</th>
+                    <th>SKS</th>
+                    <th>Semester</th>
+                    <th>Kelas</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+            `;
+
+            resultDkbs.data.forEach(item => {
+              html += `
+                <tr>
+                  <td>${item.kode_mk}</td>
+                  <td>${item.nama_mk}</td>
+                  <td>${item.sks}</td>
+                  <td>${item.semester}</td>
+                  <td>${item.nama_kelas}</td>
+                  <td><span class="badge bg-success">${item.status}</span></td>
+                </tr>
+              `;
+            });
+
+            html += `</tbody></table>`;
+            container.innerHTML += html;
+          } else {
+            container.innerHTML += `<div class="alert alert-info mt-4">Belum ada mata kuliah yang diambil (DKBS kosong).</div>`;
+          }
+        }
+
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
     })();
   </script>
 </body>

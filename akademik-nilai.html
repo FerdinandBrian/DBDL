@@ -77,11 +77,76 @@
         window.location.href = './login.html';
       }
     }
-    (function () {
+    (async function () {
       const nrp = localStorage.getItem('nrp');
-      if (!nrp) return;
-      const el = document.getElementById('user-nrp');
-      if (el) el.textContent = 'NRP: ' + nrp;
+      const userRole = localStorage.getItem('userRole');
+
+      if (!nrp || userRole !== 'mahasiswa') {
+        window.location.href = './login.html';
+        return;
+      }
+
+      try {
+        // Fetch User Data for Navbar
+        const responseMhs = await fetch(`http://localhost:8000/server/mhs.php?nrp=${nrp}`);
+        const resultMhs = await responseMhs.json();
+        if (resultMhs.success) {
+          const data = resultMhs.data;
+          const el = document.getElementById('user-nrp');
+          if (el) el.textContent = `${data.nama} (${data.nrp})`;
+        }
+
+        // Fetch Nilai Data for Table
+        const responseNilai = await fetch(`http://localhost:8000/server/get_nilai.php?nrp=${nrp}`);
+        const resultNilai = await responseNilai.json();
+
+        if (resultNilai.success) {
+          const container = document.querySelector('.container.mt-5');
+
+          if (resultNilai.data.length > 0) {
+            let html = `
+              <table class="table table-hover mt-4">
+                <thead>
+                  <tr>
+                    <th>Kode MK</th>
+                    <th>Mata Kuliah</th>
+                    <th>SKS</th>
+                    <th>Tugas</th>
+                    <th>UTS</th>
+                    <th>UAS</th>
+                    <th>Akhir</th>
+                    <th>Grade</th>
+                  </tr>
+                </thead>
+                <tbody>
+            `;
+
+            resultNilai.data.forEach(item => {
+              let badgeColor = item.grade === 'A' ? 'bg-success' : (item.grade === 'B' ? 'bg-info' : 'bg-warning');
+              html += `
+                <tr>
+                  <td>${item.kode_mk}</td>
+                  <td>${item.nama_mk}</td>
+                  <td>${item.sks}</td>
+                  <td>${item.tugas}</td>
+                  <td>${item.uts}</td>
+                  <td>${item.uas}</td>
+                  <td><strong>${item.nilai_akhir}</strong></td>
+                  <td><span class="badge ${badgeColor}">${item.grade}</span></td>
+                </tr>
+              `;
+            });
+
+            html += `</tbody></table>`;
+            container.innerHTML += html;
+          } else {
+            container.innerHTML += `<div class="alert alert-info mt-4">Belum ada nilai yang tersedia.</div>`;
+          }
+        }
+
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
     })();
   </script>
 </body>
