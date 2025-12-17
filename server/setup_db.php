@@ -20,7 +20,7 @@ if ($conn->query($sql) === TRUE) {
     die("Error creating database: " . $conn->error);
 }
 
-// Select database
+// Select the database
 $conn->select_db("edutrack");
 
 // Import Schema
