@@ -12,9 +12,9 @@ async function handleLogin(event) {
     const password = document.getElementById('password').value;
 
     try {
-        // Menggunakan PHP Built-in Server
-        const API_BASE_URL = 'http://localhost:8000/server';
-        const res = await fetch(`${API_BASE_URL}/login.php`, {
+        // Using Laravel API
+        const API_BASE_URL = 'http://localhost:8000';
+        const res = await fetch(`${API_BASE_URL}/api/login`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ nrp, password, role: currentRole })
